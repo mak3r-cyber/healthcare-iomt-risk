@@ -92,12 +92,12 @@ This project provides an **EBIOS Risk Manager Light** methodology tailored for s
 
 ## Installation
 
-## Prerequisites
+### Prerequisites
 
 - Python 3.8+
 - pip
 
-## Install dependencies
+### Install dependencies
 
 ```bash
 git clone https://github.com/mak3r-cyber/risk-assessment-sante-iomt.git
@@ -105,7 +105,7 @@ cd risk-assessment-sante-iomt
 pip install pandas openpyxl
 ```
 
-## Usage
+### Usage
 
 Generate the risk matrix in Excel
 python3 tools/csv2xlsx.py
@@ -117,7 +117,7 @@ Dashboard: Statistical summary and top critical risks
 
 Customize for your structure
 
-##Edit 02-Matrices/risk_matrix.csv:
+## Edit 02-Matrices/risk_matrix.csv:
 
 ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
 R026,Your asset,Your threat,Your vulnerability,3,4,12,Reduce,Your recommendation
@@ -134,9 +134,9 @@ Regenerate the matrix:
 python3 tools/csv2xlsx.py
 ```
 
-##Apply the methodology
+### Apply the methodology
 
-Follow the guide in 03-Methodology/Methodology.md:
+## Follow the guide in 03-Methodology/Methodology.md:
 
 Phase 1: Identify the scope (2-4 hours)
 Phase 2: Identify threats (4-6 hours)

@@ -110,14 +110,14 @@ pip install pandas openpyxl
 Generate the risk matrix in Excel
 python3 tools/csv2xlsx.py
 
-### Output: 02-Matrices/risk_matrix.xlsx with 3 sheets:
+Output: 02-Matrices/risk_matrix.xlsx with 3 sheets:
 Risk Matrix: Fully scored and color-coded table
 Heatmap: Visualization of Probability × Impact
 Dashboard: Statistical summary and top critical risks
 
 Customize for your structure
 
-Edit 02-Matrices/risk_matrix.csv:
+##Edit 02-Matrices/risk_matrix.csv:
 
 ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
 R026,Your asset,Your threat,Your vulnerability,3,4,12,Reduce,Your recommendation

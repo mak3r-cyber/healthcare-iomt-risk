@@ -1,14 +1,14 @@
-# ISO 27002 IoMT Mapping
+## ISO 27002 IoMT Mapping
 
-Ce document fait partie d'une initiative de recherche sur la gestion des risques dans l'Internet des objets médicaux (IoMT). Il inclut des liens vers des ressources externes, notamment celles fournies par [PQB](https://www.pqb.fr/page-exigences-de-la-norme-iso-27001-securite-de-l-information-version-2022.php), concernant les exigences de la norme ISO 27001 version 2022.
+This document is part of a research initiative on risk management in the Internet of Medical Things (IoMT). It includes links to external resources, notably those provided by **PQB**, regarding the **ISO 27001:2022** requirements.
 
-## Droit d'Auteur et Propriété Intellectuelle
+### Legal Notice and Intellectual Property
 
-Les ressources et les documents mentionnés dans ce fichier, en particulier ceux de PQB, sont protégés par des droits d'auteur. L'utilisation de ces ressources est soumise aux conditions suivantes :
+The resources and documents referenced in this file, particularly those from **PQB**, are protected by copyright. The use of these resources is subject to the following conditions:
 
-- L'utilisation des ressources de PQB est autorisée dans le cadre de la recherche et du développement personnel, sans but commercial.
-- Vous devez toujours mentionner l'auteur des ressources en incluant un lien vers leur site officiel ([PQB](https://www.pqb.fr)).
+- The use of **PQB** resources is permitted for personal research and development purposes only, without commercial intent.
+- Always acknowledge the author of these resources by including a link to their official website (PQB).
 
-## Exemples de Liens
+### Examples of Links
 
-- [ISO 27001 Requirements by PQB](https://www.pqb.fr/page-exigences-de-la-norme-iso-27001-securite-de-l-information-version-2022.php)
+- **ISO 27001 Requirements by PQB**: [PQB - ISO 27001 Security Requirements](https://www.pqb.fr/page-exigences-de-la-norme-iso-27001-securite-de-l-information-version-2022.php)

@@ -117,6 +117,26 @@ Dashboard: Statistical summary and top critical risks
 
 Customize for your structure
 
+### Fictional Use Cases (for illustration)
+
+> **Realistic scenarios, but 100% fictional** — based on academic studies (Master’s in Cybersecurity, RNCP 36924).  
+> **No real data used.**  
+> **Purpose**: demonstrate how the methodology applies in practice.
+
+#### 1. **General Medical Practice** *(fictional)*
+- 2 doctors, 2,000 patients/year
+- 10 risks analyzed (ransomware, phishing, etc.)
+- Security budget: **€13,700 in year 1 → €3,200/year ongoing**
+- ROI: positive from year 3
+
+#### 2. **Cardiology Clinic with IoMT** *(fictional)*
+- 4 cardiologists, 5,000 patients/year, 30 beds
+- Devices: patient monitors, defibrillators, infusion pumps
+- 15 IoMT-specific risks (malicious firmware, parameter tampering…)
+- Security budget: **€85,000 in year 1 → €25,000/year recurring**
+
+> **Got a real-world case?** → Share it **anonymously** via [issue #1](https://github.com/mak3r-cyber/healthcare-iomt-risk/issues/1)
+
 ## Edit 02-Matrices/risk_matrix.csv:
 
 ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation

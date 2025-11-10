@@ -1,5 +1,4 @@
 # Roadmap
-
 ## v0.2
 - Risk scoring CLI (impact × likelihood, CSV in/out)
 - CSV schema validator (CI)
@@ -12,6 +11,4 @@
 
 ## v0.4
 - “Pentest-light” checklists (safe), synthetic examples
-- Export pipeline: CSV → XLSX → Markdown report → PDF
-
-CSV reste la source de vérité.
+- Export: CSV → XLSX → Markdown report → PDF

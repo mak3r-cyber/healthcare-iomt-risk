@@ -23,3 +23,5 @@ GitHub Actions builds `docs/reports/risk_matrix.xlsx` as an artifact.
 
 ## Scope and ethics
 Educational scope only. No patient data. Synthetic samples.
+
+![csv-to-xlsx](https://github.com/mak3r-cyber/healthcare-iomt-risk/actions/workflows/csv2xlsx.yml/badge.svg)

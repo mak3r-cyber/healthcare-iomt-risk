@@ -9,11 +9,6 @@ Cybersecurity risk assessment framework for healthcare environments and connecte
 
 This project provides an **EBIOS Risk Manager Light** methodology tailored for small and medium-sized healthcare organizations (medical offices, clinics, laboratories) that do not have a dedicated Information Security Officer (ISO).
 
-**Developed as part of:**
-- RNCP Certification 36924 Level 7 "Cybersecurity and IT Security Expert"
-- Master's Degree in Cybersecurity
-- Academic project with real professional application
-
 ### Objectives
 
 - Identify and assess priority cybersecurity risks in healthcare

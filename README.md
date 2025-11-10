@@ -1,4 +1,6 @@
 # Healthcare IoMT Risk Assessment Framework
+![csv-to-xlsx](https://github.com/mak3r-cyber/healthcare-iomt-risk/actions/workflows/csv2xlsx.yml/badge.svg)
+
 
 Open-source toolkit for risk assessment in healthcare environments and medical IoT (IoMT).
 

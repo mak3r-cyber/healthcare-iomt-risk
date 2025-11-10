@@ -1,0 +1,24 @@
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'vX.Y.Z'
+        required: true
+jobs:
+  cut:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas openpyxl
+      - run: python tools/csv2xlsx.py
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag }}
+          files: docs/reports/risk_matrix.xlsx
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

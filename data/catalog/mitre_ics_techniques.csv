@@ -1,0 +1,6 @@
+id,tactic,technique,description
+T0819,Initial Access,Drive-by Compromise,Initial access via exposed web interface
+T0869,Execution,Command-Line Interface,Execute arbitrary commands on device
+T0887,Credential Access,Brute Force,Guess default or weak credentials
+T0886,Discovery,Network Service Scanning,Enumerate open services and ports
+T0822,Impact,Service Stop,Stop or degrade safety-related functions

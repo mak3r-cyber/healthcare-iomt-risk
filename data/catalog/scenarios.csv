@@ -1,0 +1,9 @@
+scenario_ids,justification,sources
+"S1, S2, S10","Impact max sur OT, PRA et attractions","ANSSI; MITRE T1486; ISO A.5.25/A.8.16"
+"S8, S9","DICT note segmentation incomplète VLAN OT","IEC 62443; MITRE ICS T0843; ISO A.8.20"
+"S3, S4","LoRa non chiffré, faible supervision","OWASP IoT A05; ENISA IoT; CVE-2021-34485"
+"S5, S7, S8","MFA manquant dans DICT, consoles vulnérables","CISA AA22-074A; OWASP Auth Guide; ISO A.8.5"
+"S6, S7","SOC jeune, logs OT non intégrés","ANSSI SOC Guide; ISO A.5.24/A.8.16"
+"S10","PRA partiellement existant selon DICT","ISO 22301; ISO A.5.25; ANSSI PRA Guide"
+"S11, S12","Vulnérabilité CVE, tests partiels","OWASP Top10 A05; CVE-2023-25690; ISO A.8.27"
+"S6, S13","Mentionné dans DICT (absence de formation, MFA)","MITRE T1566; ANSSI phishing; ISO A.6.3/A.8.5"

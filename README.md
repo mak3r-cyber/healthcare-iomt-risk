@@ -137,12 +137,12 @@ Customize for your structure
 
 > **Got a real-world case?** → Share it **anonymously** via [issue #1](https://github.com/mak3r-cyber/healthcare-iomt-risk/issues/1)
 
-## Edit 02-Matrices/risk_matrix.csv:
+### Edit 02-Matrices/risk_matrix.csv:
 
 ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
 R026,Your asset,Your threat,Your vulnerability,3,4,12,Reduce,Your recommendation
 
-## Columns:
+### Columns:
 
 Probability: 1-5 (Very low → Very high)
 Impact: 1-5 (Negligible → Catastrophic)

@@ -12,7 +12,7 @@ This project provides an **EBIOS Risk Manager Light** methodology tailored for s
 ### Objectives
 
 - Identify and assess priority cybersecurity risks in healthcare
-- Provide an operational methodology adapted to SMEs (<50 employees)
+- Provide an operational methodology adapted to SMEs 
 - Integrate specific IoMT devices (connected medical devices)
 - Ensure regulatory compliance (GDPR, HDS, ISO 27001, EU MDR)
 - Automated tools for generating risk matrices and reports

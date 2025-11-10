@@ -1,0 +1,3 @@
+risk_id,asset,threat,impact,likelihood,control_status
+R001,Pacemaker Model X,Remote code execution,5,3,partial
+R002,Insulin Pump Y,Data interception,4,4,absent

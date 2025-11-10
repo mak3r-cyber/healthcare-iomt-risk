@@ -1,0 +1,6 @@
+id,title,desc
+A01,Weak Guessable or Hardcoded Passwords,Defaults or weak credentials
+A02,Insecure Network Services,Exposed or unsafe services
+A03,Insecure Ecosystem Interfaces,APIs mobile cloud portals
+A04,Lack of Secure Update Mechanism,No signed updates
+A05,Use of Insecure or Outdated Components,Known vulnerable libs

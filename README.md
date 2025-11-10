@@ -5,7 +5,7 @@
 
 Cybersecurity risk assessment framework for healthcare environments and connected medical devices (IoMT).
 
-## Context
+### Context
 
 This project provides an **EBIOS Risk Manager Light** methodology tailored for small and medium-sized healthcare organizations (medical offices, clinics, laboratories) that do not have a dedicated Information Security Officer (ISO).
 
@@ -14,7 +14,7 @@ This project provides an **EBIOS Risk Manager Light** methodology tailored for s
 - Master's Degree in Cybersecurity
 - Academic project with real professional application
 
-## Objectives
+### Objectives
 
 - Identify and assess priority cybersecurity risks in healthcare
 - Provide an operational methodology adapted to SMEs (<50 employees)
@@ -22,7 +22,7 @@ This project provides an **EBIOS Risk Manager Light** methodology tailored for s
 - Ensure regulatory compliance (GDPR, HDS, ISO 27001, EU MDR)
 - Automated tools for generating risk matrices and reports
 
-## Project Structure
+### Project Structure
 
 ```bash
 ── 01-Research
@@ -92,12 +92,12 @@ This project provides an **EBIOS Risk Manager Light** methodology tailored for s
 
 ## Installation
 
-### Prerequisites
+## Prerequisites
 
 - Python 3.8+
 - pip
 
-### Install dependencies
+## Install dependencies
 
 ```bash
 git clone https://github.com/mak3r-cyber/risk-assessment-sante-iomt.git
@@ -105,7 +105,7 @@ cd risk-assessment-sante-iomt
 pip install pandas openpyxl
 ```
 
-### Usage
+## Usage
 
 Generate the risk matrix in Excel
 python3 tools/csv2xlsx.py
@@ -122,7 +122,7 @@ Edit 02-Matrices/risk_matrix.csv:
 ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
 R026,Your asset,Your threat,Your vulnerability,3,4,12,Reduce,Your recommendation
 
-### Columns:
+## Columns:
 
 Probability: 1-5 (Very low → Very high)
 Impact: 1-5 (Negligible → Catastrophic)
@@ -134,7 +134,7 @@ Regenerate the matrix:
 python3 tools/csv2xlsx.py
 ```
 
-Apply the methodology
+##Apply the methodology
 
 Follow the guide in 03-Methodology/Methodology.md:
 
@@ -147,7 +147,7 @@ Phase 6: Validation & follow-up (ongoing)
 Total effort for SMEs (10-20 people): 30-40 hours for the initial analysis
 Case Studies Included
 
-## 1. General Medical Office
+### 1. General Medical Office
 
 Context: 2 doctors, 2000 patients, basic IT infrastructure
 Analyzed Risks: 10 scenarios (ransomware, phishing, data theft…)
@@ -156,7 +156,7 @@ ROI: Positive from year 3
 
 See the full case study
 
-## 2. Cardiology Clinic IoMT
+### 2. Cardiology Clinic IoMT
 
 Context: 4 cardiologists, 5000 patients/year, 30 beds, critical connected devices
 IoMT Devices: Patient monitors, defibrillators, infusion pumps, telemetry 24/7
@@ -165,7 +165,7 @@ Security Budget: 85k€ in year 1, then 25k€/year recurring
 See the full case study
 Regulatory Compliance
 
-### This methodology covers:
+## This methodology covers:
 
 GDPR Article 32 - Appropriate technical and organizational measures
 ISO 27001 - Risk analysis (Clause 6.1.2) + Annex A controls
@@ -173,7 +173,7 @@ HDS - Health data hosting security requirements (CNIL guidelines)
 EU MDR 2017/745 - Medical device cybersecurity (Annex I)
 NIS2 Directive - Critical health infrastructure (if applicable)
 
-### Documented Sources
+## Documented Sources
 
 100+ verified sources in 01-Research/Sources.md:
 
@@ -184,7 +184,7 @@ Medical Devices: FDA Cybersecurity, IEC 62304/80001, CVE database
 Threats: CERT Santé, Cyble, Recorded Future, IBM Cost of Breach
 Protocols: HL7 FHIR, DICOM, Bluetooth LE, 802.1X
 
-### Technologies Used
+## Technologies Used
 
 Python 3.8+ - Automation
 pandas - CSV data manipulation
@@ -192,15 +192,15 @@ openpyxl - Excel generation with formatting
 Markdown - Documentation
 Git - Versioning
 
-### Roadmap
+## Roadmap
 
-## Version 1.0 (Current)
+### Version 1.0 (Current)
 
 Complete EBIOS RM Light methodology
 25 health/IoMT risk scenarios matrix
 Python tool for Excel generation
 
-## 2 detailed case studies
+#### 2 detailed case studies
 
 100+ source documentation base
 Version 1.1 (January 2025)
@@ -210,7 +210,7 @@ Illustrated user guide
 Health incident stats 2024-2025
 Recent CVE list for medical devices
 
-## Version 2.0 (Q2 2025)
+### Version 2.0 (Q2 2025)
 
 Interactive web interface (Streamlit/Dash)
 Automated PDF report export
@@ -218,7 +218,7 @@ Expanded risk scenario library (50+)
 Integrated GDPR compliance module
 Multi-language support (FR/EN)
 
-### Contribution
+## Contribution
 
 This project is academic, but contributions are welcome:
 Fork the project
@@ -235,31 +235,30 @@ Python tool improvements
 Translation to English
 Bug fixes / corrections
 
-### License
+## License
 
 Distributed under the MIT License. See LICENSE for more information.
 
-### Free use for:
+## Free use for:
 
 Academic use
 Professional use
 Modification and adaptation
 Commercial use (with attribution)
 
-### Author
+## Author
 
 Kamilia Meliani & Lazreg Meliani
 Cybersecurity - Lead implementation - Purple-team
 Specialties: GRC, ISO 27001/27002, EBIOS RM, Security Audits
 
-### Certifications:
+## Certifications:
 
 ISO 27001 Lead Implemention (in progress)
 EBIOS Risk Manager (planned for 2026)
 Cisco, Linux
 
-
-### Acknowledgements
+## Acknowledgements
 
 ANSSI - EBIOS Risk Manager methodology
 CNIL - Practical guides for the healthcare sector
@@ -267,7 +266,7 @@ CERT Santé - Threat monitoring
 Cybersecurity health community - Feedback and insights
 Contact & Support
 
-### Questions, suggestions, collaborations:
+## Questions, suggestions, collaborations:
 
 GitHub Issues: Open a ticket
 LinkedIn: Kamilia Meliani (coming soon publication)

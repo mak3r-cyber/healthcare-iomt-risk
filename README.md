@@ -29,6 +29,14 @@ Small and medium-sized healthcare organizations typically lack the necessary res
 - Automate the generation of risk matrices and reports.
 - Provide light pentest (SAFE) methodology and detection rules.
 
+## Project Status
+
+This project is currently under development. The code is available for exploration, but please note that it is **not yet executable** until further checks and updates are completed.
+
+Feel free to explore the code, provide feedback, or contribute. Instructions for executing the project will be provided once the setup is fully verified.
+
+Thank you for your patience!
+
 ## Quickstart (3 commands)
 
 Before starting, make sure to install **RiskOps** (instructions coming soon).

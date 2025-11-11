@@ -8,14 +8,30 @@ Cybersecurity risk assessment framework for healthcare environments and connecte
 ### Context
 
 This project provides an **EBIOS Risk Manager Light** methodology tailored for small and medium-sized healthcare organizations (medical offices, clinics, laboratories) that do not have a dedicated Information Security Officer (ISO).
+PARFAIT — TU VEUX GARDER LES OBJECTIFS + AJOUTER PENTEST & DÉTECTION → ON LE FAIT EN 1 MINUTE.
+
+README FINAL (ANGLAIS, PRO, ENGAGEANT, AVEC OBJECTIFS COMPLÉTÉS)
+markdown# RiskOps Health / IoMT — Open-source toolkit (design phase)
+
+Open-source **operational kit** for **healthcare SMEs**: assess **IoMT cyber risks** without consultants.
+
+---
+
+### In place
+- **Risk matrix**: CSV to XLSX (GitHub Actions)
+- **HL7/DICOM rules**: pilot
+- **Compliance**: HDS, ISO 27001
+- **SAFE pentest**: in design
+- **Detection rules**: pilot (HL7/DICOM)
 
 ### Objectives
 
-- Identify and assess priority cybersecurity risks in healthcare
-- Provide an operational methodology adapted to SMEs 
-- Integrate specific IoMT devices (connected medical devices)
-- Ensure regulatory compliance (GDPR, HDS, ISO 27001, EU MDR)
-- Automated tools for generating risk matrices and reports
+- Identify & assess priority cyber risks in healthcare
+- Provide an **operational methodology** for SMEs
+- Integrate **IoMT devices** (monitors, pumps, etc.)
+- Ensure **compliance** (GDPR, HDS, ISO 27001, EU MDR)
+- Automate **risk matrices & reports**
+- Deliver **light pentest (SAFE)** & **detection rul
 
 ### Project Structure
 
@@ -132,12 +148,11 @@ Customize for your structure
 
 > **Got a real-world case?** → Share it **anonymously** via [issue #1](https://github.com/mak3r-cyber/healthcare-iomt-risk/issues/1)
 
+# Your expertise?
+**CISO, GRC, MedTech**:  
+> **What’s missing for real-world use?**
 
-## Votre expertise terrain ?
-**RSSI, GRC, MedTech** :  
-> **Quels éléments manquent pour une intégration fluide ?**
-
-*(Ex. : export PDF, intégration SIH, scoring auto…)*
+*(PDF export, HIS sync, auto-scoring…)*
 
 ---
 

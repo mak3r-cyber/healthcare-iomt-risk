@@ -1,4 +1,7 @@
 # **RiskOps Health / IoMT — Open-source toolkit (design phase)**
+# RiskOps Health / IoMT — Open-Source Cybersecurity Risk Assessment Toolkit
+## A Framework for Assessing IoMT Cyber Risks in Healthcare Environments
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -9,7 +12,7 @@ Cybersecurity risk assessment framework for healthcare environments and connecte
 
 This project provides an **EBIOS Risk Manager Light** methodology tailored for small and medium-sized healthcare organizations (medical offices, clinics, laboratories) that do not have a dedicated Information Security Officer (ISO).
 
-Open-source **operational kit** for **healthcare SMEs**: assess **IoMT cyber risks** without consultants.
+This open-source toolkit is designed to help healthcare SMEs assess cyber risks in IoMT devices (monitors, pumps, etc.) without the need for external consultants. It provides an easy-to-use framework for risk identification, mitigation, and compliance, specifically tailored to small and medium-sized healthcare organizations.
 
 ---
 
@@ -311,6 +314,6 @@ LinkedIn: Kamilia Meliani (coming soon publication)
 
 If this project helps you, feel free to star it!
 
-Last update: November 2024
+Last update: November 2025
 Version: 1.0
 Status: Active - Continuous development

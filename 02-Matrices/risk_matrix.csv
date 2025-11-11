@@ -1,0 +1,26 @@
+ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
+R001,Bluetooth Insulin Pump,Communication Interception,Weak BLE encryption,4,5,20,Reduce,Firmware upgrade + medical network segmentation
+R002,PACS Imaging Server,Ransomware,Lack of network segmentation,3,5,15,Reduce,Isolated medical VLAN + 3-2-1 offline backup
+R003,Patient EHR/DPI Record,Unauthorized Access,Insufficient IAM management,4,4,16,Reduce,Mandatory MFA + quarterly rights review
+R004,Physician Workstation,Targeted Medical Staff Phishing,Insufficient training,4,4,16,Reduce,Awareness campaigns + monthly phishing simulation
+R005,Patient Data Backup,Data Destruction (Ransomware),Untested backup,2,5,10,Reduce,Quarterly restoration test + 3-2-1 offline backup
+R006,Telemedicine VPN Connection,Credential Compromise,MFA not deployed,3,4,12,Reduce,MFA deployment (TOTP/FIDO2) on all remote access
+R007,Connected Pacemaker,Vital Parameter Manipulation,Lack of RF communication encryption,2,5,10,Reduce,Firmware upgrade + encrypted protocol + anomaly monitoring
+R008,Medication Dispensing System,Dosing Error by Modification,Unauthorized database modification,2,5,10,Reduce,Integrity control + audit logs + double verification
+R009,Laboratory Database,Analysis Data Leak,Failing patch management,3,4,12,Reduce,Patch policy <30d critical + monthly vulnerability scan
+R010,Patient Monitoring Device,Equipment Denial of Service,Lack of high availability,3,4,12,Reduce,Critical equipment redundancy + automatic failover
+R011,Mobile Nurse Tablet,Device Theft/Loss,Lack of disk encryption,3,3,9,Reduce,Bitlocker/LUKS full disk + MDM + remote wipe
+R012,Medication Label Printer,Insecure Sensitive Document Printing,Open network access,2,3,6,Accept,Logs monitoring + isolated network if budget available
+R013,Patient Web Portal,SQL Injection via forms,Unaudited code + missing WAF,3,4,12,Reduce,Security code audit + WAF + secure dev training (OWASP)
+R014,HL7 FHIR Data Exchange API,Patient Data Exposure,Weak API authentication,3,4,12,Reduce,OAuth 2.0 + rate limiting + access logging + mTLS
+R015,Online Appointment System,DDoS Availability Attack,Lack of perimeter protection,2,3,6,Transfer,Cloudflare/AWS Shield + CDN
+R016,Connected CGM Glucose Sensor,Glycemia Data Falsification,Missing data validation,2,4,8,Reduce,Data checksum + abnormal value alerts + double verification
+R017,Long-term Patient Archiving,GDPR Retention Non-compliance,Conservation period not respected,3,4,12,Reduce,Automated retention policy + auto purge + annual audit
+R018,HDS Cloud Provider,Host Service Unavailability,Insufficient SLA 99.5%,2,4,8,Transfer,SLA 99.9% contract + penalties + documented continuity plan
+R019,Medical WiFi Network,Patient Traffic Interception,WPA2 KRACK vulnerabilities,3,3,9,Reduce,WPA3-Enterprise migration + 802.1X certificates + VLAN segmentation
+R020,MRI/Scanner Imaging Station,Malware via USB Peripherals,Lack of USB port control,2,4,8,Reduce,USB blocking via GPO + peripheral whitelist + certified medical antivirus
+R021,Billing System,Fraudulent Rate Modification,Lack of admin access control,2,4,8,Reduce,Separation of duties + immutable logs + monthly review
+R022,Secured Physician Messaging,Patient Email Interception,Non-encrypted SMTP TLS,3,3,9,Reduce,Enforce TLS 1.3 + DMARC/SPF/DKIM + PGP awareness
+R023,Connected Surgery Telescope,Operative Video Stream Manipulation,Non-isolated network,1,5,5,Accept,Dedicated operating room network (if budget) + monitoring
+R024,Patient Mobile Application,Account Credential Theft,Insecure local storage,3,3,9,Reduce,Keychain/Keystore secure + biometrics + session timeout
+R025,Active Directory Server,Domain Compromise (Golden Ticket),Lack of admin tiering,2,5,10,Reduce,AD Tiering (Tier 0/1/2) + PAW + Credential Guard

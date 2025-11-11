@@ -254,9 +254,10 @@ def main():
     print(f"Saving to: {xlsx_path}")
     wb.save(xlsx_path)
 
-    print(f"Success: Excel file generated successfully!")
-    print(f"  - {len(df)} risks processed")
-    print(f"  - 3 tabs created: Matrix + Heatmap + Dashboard")
+    print("Creating Excel file...")  # Pas besoin de f-string ici
+    print("Success: Excel file generated successfully!")  # Pas besoin de f-string ici
+    print(f"  - {len(df)} risks processed")  # F-string nécessaire ici pour afficher len(df)
+    print("  - 3 tabs created: Matrix + Heatmap + Dashboard")  # Pas besoin de f-string ici
 
 if __name__ == '__main__':
     main()

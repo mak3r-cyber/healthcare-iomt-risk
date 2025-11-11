@@ -130,7 +130,8 @@ Customize for your structure
 
 ## Fictional Use Cases (for illustration)
 
-> **Realistic scenarios, but 100% fictional** — based on academic studies (Master’s in Cybersecurity, RNCP 36924).  
+> **Realistic scenarios, but 100% fictional** — based on healthcare-iomt-risk/docs
+/medical-practice-case-study.md
 > **No real data used.**  
 > **Purpose**: demonstrate how the methodology applies in practice.
 

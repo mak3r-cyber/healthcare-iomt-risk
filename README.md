@@ -8,10 +8,6 @@ Cybersecurity risk assessment framework for healthcare environments and connecte
 ### Context
 
 This project provides an **EBIOS Risk Manager Light** methodology tailored for small and medium-sized healthcare organizations (medical offices, clinics, laboratories) that do not have a dedicated Information Security Officer (ISO).
-PARFAIT — TU VEUX GARDER LES OBJECTIFS + AJOUTER PENTEST & DÉTECTION → ON LE FAIT EN 1 MINUTE.
-
-README FINAL (ANGLAIS, PRO, ENGAGEANT, AVEC OBJECTIFS COMPLÉTÉS)
-markdown# RiskOps Health / IoMT — Open-source toolkit (design phase)
 
 Open-source **operational kit** for **healthcare SMEs**: assess **IoMT cyber risks** without consultants.
 

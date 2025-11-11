@@ -29,7 +29,9 @@ Small and medium-sized healthcare organizations typically lack the necessary res
 - Automate the generation of risk matrices and reports.
 - Provide light pentest (SAFE) methodology and detection rules.
 
-## Quickstart (3 commandes)
+## Quickstart (3 commands)
+
+Before starting, make sure to install **RiskOps** (instructions coming soon).
 
 ```bash
 python -m venv .venv && . .venv/bin/activate

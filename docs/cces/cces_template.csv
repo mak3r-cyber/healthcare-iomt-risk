@@ -1,0 +1,9 @@
+ID,Contrôle,Domaine,Categorie,Description,Mesure de référence,Niveau actuel (0-4),Niveau cible (0-4),Responsable,Délai,Statut
+CCES-001,Inventaire des dispositifs IoMT,Inventaire,Technique,"Liste complète et à jour de tous les dispositifs IoMT",ISO 27001 A.8.1.1,2,4,RSSI,2025-06,En cours
+CCES-002,Segmentation réseau dédiée IoMT,Réseau,Technique,"Réseau IoMT séparé du réseau administratif",ANSSI Guide IoMT,1,4,Admin réseau,2025-09,Planifié
+CCES-003,Authentification forte sur dispositifs,Accès,Technique,"MFA ou certificats sur tous les équipements critiques",NIST 800-63B,0,3,Fabricant/RSSI,2026-01,À initier
+CCES-004,Journalisation centralisée des dispositifs,SOC,Technique,"Logs IoMT envoyés vers SIEM",HDS Réf. 7,1,4,Équipe SOC,2025-12,En cours
+CCES-005,Formation annuelle du personnel santé,Sensibilisation,Organisationnelle,"Formation cybersécurité spécifique IoMT",ISO 27001 A.7.2.2,3,4,DRH/RSSI,2025-03,Planifié
+CCES-006,Gestion des vulnérabilités IoMT,Patch Management,Technique,"Scan mensuel + correctifs priorisés",ANSSI IoMT,1,4,RSSI,2025-06,En cours
+CCES-007,Backup chiffré des configurations IoMT,Continuité,Technique,"Sauvegarde hebdo chiffrée des configs",HDS Réf. 9,2,4,Admin système,2025-04,Planifié
+CCES-008,Supervision des flux HL7/DICOM,SOC,Technique,"Alerting sur anomalies de volume/port",Recommandation ANSSI,0,3,SOC,2025-12,À initier

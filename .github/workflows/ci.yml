@@ -31,4 +31,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
+    # Installer Syft
+    - name: Install Syft
+      run: |
+        curl -sSfL https://github.com/anchore/syft/releases/download/v0.41.0/syft_0.41.0_linux_amd64.tar.gz | tar -xz -C /usr/local/bin
+
+    # Installer Trivy
+    - name: Install Trivy
+      run: |
+        curl -sfL https://github.com/aquasecurity/trivy/releases/download/v0.35.0/trivy_0.35.0_Linux-64bit.tar.gz | tar -xz -C /usr/local/bin
+
+    # Lancer les vérifications de sécurité
     - run: bash tools/sec_checks.sh

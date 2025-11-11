@@ -252,3 +252,11 @@ If this project helps you, feel free to star it!
 Last update: November 2024
 Version: 1.0
 Status: Active - Continuous development
+
+## Quickstart (3 commandes)
+
+```bash
+python -m venv .venv && . .venv/bin/activate
+pip install -e .
+riskops validate risk samples/healthcare/risk_sample.json
+```

@@ -32,69 +32,26 @@ Small and medium-sized healthcare organizations typically lack the necessary res
 ### Project Structure
 
 ```bash
-── 01-Research
-│ ├── iomt_risk_sources.md
-│ └── Sources.md
+.
+├── 01-Research
 ├── 02-Matrices
-│ └── risk_matrix.csv
 ├── 03-Methodology
-│ ├── ebios-rm-light.md
-│ └── README.md
 ├── 04-Planning
-│ └── README.md
 ├── CODEOWNERS
 ├── CONTRIBUTING.md
+├── current_requirements.txt
 ├── data
-│ └── catalog
-│ ├── free-security-resources.md
-│ ├── mitre_ics_techniques.csv
-│ ├── owasp_iot_top10.csv
-│ └── scenarios.csv
 ├── docs
-│ ├── architecture
-│ │ └── ADR-0001-scope.md
-│ ├── compliance
-│ │ ├── iso27002-iomt-mapping.md
-│ │ └── mapping.md
-│ ├── medical-practice-case-study.md
-│ ├── reports
-│ │ └── risk_matrix.xlsx
-│ ├── resource-catalog.md
-│ └── runbooks
 ├── LICENSE
 ├── pyproject.toml
 ├── README.md
-├── README.md.old
 ├── requirements.txt
 ├── ROADMAP.md
 ├── SECURITY.md
 ├── src
-│ └── skadia_iomt
-│ └── init.py
 ├── tools
-│ ├── csv2xlsx.py
-│ ├── demo.sh
-│ ├── sec_checks.sh
-│ └── validate_controls_link.py
 └── venv
-├── bin
-│ ├── activate
-│ ├── activate.csh
-│ ├── activate.fish
-│ ├── Activate.ps1
-│ ├── normalizer
-│ ├── pip
-│ ├── pip3
-│ ├── pip3.13
-│ ├── python -> /usr/bin/python
-│ ├── python3 -> python
-│ └── python3.13 -> python
-├── include
-│ └── python3.13
-├── lib
-│ └── python3.13
-├── lib64 -> lib
-└── pyvenv.cfg
+
 ```
 
 ## Installation

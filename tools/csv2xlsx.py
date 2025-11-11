@@ -9,6 +9,9 @@ from openpyxl.utils import get_column_letter
 import sys
 from pathlib import Path
 
+csv_path = "02-Matrices/risk_matrix.csv"
+
+
 # Colors for Risk Scoring (English Keys)
 COLORS = {
     'low': 'C6EFCE',      # Light Green

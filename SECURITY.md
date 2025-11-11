@@ -1,5 +1,5 @@
 # Security Policy
-Signalement vulnérabilités: security.contact@mak3r-cyber.dev
+Signalement vulnérabilités: git-healthcareframe.mascot374@passmail.com
 Délai de divulgation responsable: 90 jours (par défaut).
 Branches supportées: main.
 Pas de données réelles dans les issues.

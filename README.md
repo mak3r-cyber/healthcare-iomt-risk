@@ -153,12 +153,6 @@ Customize for your structure
 
 ---
 
-## Repo ouvert
-https://github.com/mak3r-cyber/healthcare-iomt-risk  
-*(Star pour suivre — PR avec 1 revue)*
-
-> **Projet en co-construction** — V1 en janvier 2025
-
 #cybersecurity #IoMT #HDS #ISO27001 #GRC #MedTech #opensource
 
 ### Edit 02-Matrices/risk_matrix.csv:

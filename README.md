@@ -31,11 +31,13 @@ Small and medium-sized healthcare organizations typically lack the necessary res
 
 ## Project Status
 
-This project is currently under development. The code is available for exploration, but please note that it is **not yet executable** until further checks and updates are completed.
+## Project Status
 
-Feel free to explore the code, provide feedback, or contribute. Instructions for executing the project will be provided once the setup is fully verified.
+This project is currently under active development. While the code is available for exploration, please note that **certain features are still being verified** and the project is **not yet fully executable**. Some components are in the pilot phase, and others will be added in future releases.
 
-Thank you for your patience!
+Feel free to explore the code, report issues, or contribute. Detailed instructions for executing the project will be provided once all components have been verified and are fully functional.
+
+Thank you for your patience and support!
 
 ## Quickstart (3 commands)
 

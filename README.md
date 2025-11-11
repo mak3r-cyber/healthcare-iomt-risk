@@ -246,6 +246,9 @@ Questions, suggestions, collaborations:
 
 GitHub Issues: Open a ticket
 LinkedIn: Kamilia Meliani (coming soon publication)
+Signalement vulnérabilités: git-healthcareframe.mascot374@passmail.com 
+Délai de divulgation responsable: 90 jours (par défaut). 
+Branches supportées: main. Pas de données réelles dans les issues.
 
 If this project helps you, feel free to star it!
 

@@ -3,5 +3,11 @@ docs/reports/*.xlsx
 
 # Ignore critical Intellectual Property (IP) files
 # These files should not be public, but are required locally for the methodology.
-02-Matrices/risk_matrix.csv
+# 02-Matrices/risk_matrix.csv
 03-Methodology/ebios-rm-light.md
+
+# editor backups
+*.old
+*.bak
+*.orig
+*~

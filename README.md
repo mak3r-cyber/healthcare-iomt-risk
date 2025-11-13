@@ -73,6 +73,15 @@ riskops validate risk samples/healthcare/risk_sample.json
 └── venv
 
 ```
+## Business Process Mapping
+
+This project includes several business processes specifically related to cybersecurity and compliance, in alignment with key industry standards such as **ISO 27001** and **NIS 2**.
+
+- [Incident Management](05-Processus-Metier/gestion-incidents.md)
+- [IoMT Risk Management](05-Processus-Metier/gestion-risques.md)
+- [User Access Management](05-Processus-Metier/gestion-acces.md)
+- [ISO 27001 Compliance](05-Processus-Metier/conformité-iso27001.md)
+- [NIS 2 Compliance](05-Processus-Metier/conformité-nis2.md)
 
 ## Installation
 

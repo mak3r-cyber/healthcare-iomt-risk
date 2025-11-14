@@ -10,23 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Install QA dependencies
+      - name: Install QA deps
         run: |
           python -m pip install -U pip
           pip install ruff black mypy pandas openpyxl
-
-      - name: Ruff (lint)
+      - name: Lint (ruff)
         run: ruff check .
-
-      - name: Black (format check)
+      - name: Format (black)
         run: black --check .
-
-      - name: Mypy (type check)
+      - name: Types (mypy)
         run: mypy src
 
   build-artifacts:
@@ -34,13 +29,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # ⚠️ Crée un CSV factice en CI si ton fichier réel est .gitignore
-      - name: Ensure risk_matrix.csv exists (dummy in CI)
+      # CSV factice quand ignoré dans git
+      - name: Ensure risk_matrix.csv exists
         run: |
           if [ ! -f "02-Matrices/risk_matrix.csv" ]; then
             mkdir -p 02-Matrices
@@ -50,16 +44,15 @@ R001,Example asset,Example threat,Example vulnerability,1,1,1,Accept,Example rec
 EOF
           fi
 
-      - name: Install deps for csv2xlsx
+      - name: Install Python deps
         run: |
           python -m pip install -U pip
           pip install pandas openpyxl
 
-      - name: Generate Excel risk matrix
+      - name: Generate XLSX
         run: python tools/csv2xlsx.py
 
-      - name: Upload risk matrix artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: risk-matrix-xlsx
           path: docs/reports/risk_matrix.xlsx

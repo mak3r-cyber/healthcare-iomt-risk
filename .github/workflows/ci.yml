@@ -27,7 +27,7 @@ jobs:
         run: black --check .
 
       - name: Run MyPy
-        run: mypy src
+        run: mypy tools
 
   build-artifacts:
     needs: qa

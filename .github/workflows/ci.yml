@@ -1,46 +1,84 @@
 name: ci
+
 on:
   push:
     branches: [main]
   pull_request:
+
 jobs:
   qa:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with: {python-version: '3.11'}
-    - run: python -m pip install -U pip && pip install ruff black mypy pandas openpyxl
-    - run: ruff check .
-    - run: black --check .
-    - run: mypy src
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install QA dependencies
+        run: |
+          python -m pip install -U pip
+          pip install ruff black mypy pandas openpyxl
+
+      - name: Ruff (lint)
+        run: ruff check .
+
+      - name: Black (format check)
+        run: black --check .
+
+      - name: Mypy (type check)
+        run: mypy src
+
   build-artifacts:
     needs: qa
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with: {python-version: '3.11'}
-    - run: pip install pandas openpyxl
-    - run: python tools/csv2xlsx.py
-    - uses: actions/upload-artifact@v4
-      with:
-        name: risk-matrix-xlsx
-        path: docs/reports/risk_matrix.xlsx
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # ⚠️ Crée un CSV factice en CI si ton fichier réel est .gitignore
+      - name: Ensure risk_matrix.csv exists (dummy in CI)
+        run: |
+          if [ ! -f "02-Matrices/risk_matrix.csv" ]; then
+            mkdir -p 02-Matrices
+            cat <<'EOF' > 02-Matrices/risk_matrix.csv
+ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
+R001,Example asset,Example threat,Example vulnerability,1,1,1,Accept,Example recommendation
+EOF
+          fi
+
+      - name: Install deps for csv2xlsx
+        run: |
+          python -m pip install -U pip
+          pip install pandas openpyxl
+
+      - name: Generate Excel risk matrix
+        run: python tools/csv2xlsx.py
+
+      - name: Upload risk matrix artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: risk-matrix-xlsx
+          path: docs/reports/risk_matrix.xlsx
+
   security:
+    needs: qa
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    # Installer Syft
-    - name: Install Syft
-      run: |
-        curl -sSfL https://github.com/anchore/syft/releases/download/v0.41.0/syft_0.41.0_linux_amd64.tar.gz | tar -xz -C /usr/local/bin
+      - name: Install Syft
+        run: |
+          curl -sSfL https://github.com/anchore/syft/releases/download/v0.41.0/syft_0.41.0_linux_amd64.tar.gz \
+          | sudo tar -xz -C /usr/local/bin
 
-    # Installer Trivy
-    - name: Install Trivy
-      run: |
-        curl -sfL https://github.com/aquasecurity/trivy/releases/download/v0.35.0/trivy_0.35.0_Linux-64bit.tar.gz | tar -xz -C /usr/local/bin
+      - name: Install Trivy
+        run: |
+          curl -sfL https://github.com/aquasecurity/trivy/releases/download/v0.35.0/trivy_0.35.0_Linux-64bit.tar.gz \
+          | sudo tar -xz -C /usr/local/bin
 
-    # Lancer les vérifications de sécurité
-    - run: bash tools/sec_checks.sh
+      - name: Run security checks
+        run: bash tools/sec_checks.sh

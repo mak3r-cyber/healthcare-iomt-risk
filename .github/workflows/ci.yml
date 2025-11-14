@@ -10,18 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Install QA deps
+          python-version: "3.11"
+
+      - name: Install QA dependencies
         run: |
           python -m pip install -U pip
           pip install ruff black mypy pandas openpyxl
-      - name: Lint (ruff)
+
+      - name: Run Ruff
         run: ruff check .
-      - name: Format (black)
+
+      - name: Run Black
         run: black --check .
-      - name: Types (mypy)
+
+      - name: Run MyPy
         run: mypy src
 
   build-artifacts:
@@ -29,16 +34,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      # CSV factice quand ignoré dans git
+      # Création d’un CSV factice si le vrai est ignoré par .gitignore
       - name: Ensure risk_matrix.csv exists
         run: |
           if [ ! -f "02-Matrices/risk_matrix.csv" ]; then
             mkdir -p 02-Matrices
-            cat <<'EOF' > 02-Matrices/risk_matrix.csv
+            cat << 'EOF' > 02-Matrices/risk_matrix.csv
 ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
 R001,Example asset,Example threat,Example vulnerability,1,1,1,Accept,Example recommendation
 EOF
@@ -66,12 +72,12 @@ EOF
       - name: Install Syft
         run: |
           curl -sSfL https://github.com/anchore/syft/releases/download/v0.41.0/syft_0.41.0_linux_amd64.tar.gz \
-          | sudo tar -xz -C /usr/local/bin
+            | sudo tar -xz -C /usr/local/bin
 
       - name: Install Trivy
         run: |
           curl -sfL https://github.com/aquasecurity/trivy/releases/download/v0.35.0/trivy_0.35.0_Linux-64bit.tar.gz \
-          | sudo tar -xz -C /usr/local/bin
+            | sudo tar -xz -C /usr/local/bin
 
       - name: Run security checks
         run: bash tools/sec_checks.sh

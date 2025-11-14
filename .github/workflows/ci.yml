@@ -44,10 +44,8 @@ jobs:
         run: |
           if [ ! -f "02-Matrices/risk_matrix.csv" ]; then
             mkdir -p 02-Matrices
-            cat << 'EOF' > 02-Matrices/risk_matrix.csv
-ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
-R001,Example asset,Example threat,Example vulnerability,1,1,1,Accept,Example recommendation
-EOF
+            echo "ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation" > 02-Matrices/risk_matrix.csv
+            echo "R001,Example asset,Example threat,Example vulnerability,1,1,1,Accept,Example recommendation" >> 02-Matrices/risk_matrix.csv
           fi
 
       - name: Install Python deps

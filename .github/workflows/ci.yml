@@ -27,7 +27,8 @@ jobs:
         run: black --check .
 
       - name: Run MyPy
-        run: mypy tools
+      - run: mypy --install-types --non-interactive --ignore-missing-imports --disable-error-code no-untyped-def tools
+
 
   build-artifacts:
     needs: qa

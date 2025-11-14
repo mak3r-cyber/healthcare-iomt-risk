@@ -262,9 +262,9 @@ def main():
 
     print(f"Loading CSV: {csv_path}")
     df = load_csv(csv_path)
-
-    print(f"Creating Excel file...")
-
+    
+    print("Creating Excel file...")
+    
     # Create workbook
     wb = openpyxl.Workbook()
     ws = wb.active

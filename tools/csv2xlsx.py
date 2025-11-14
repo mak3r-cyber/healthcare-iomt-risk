@@ -21,18 +21,59 @@ COLORS = {
 }
 
 def load_csv(csv_path: Path) -> pd.DataFrame:
-    """Loads the risk matrix from CSV."""
+    """
+    Loads the risk matrix from CSV.
+
+    - En local : lit 02-Matrices/risk_matrix.csv
+    - En CI (GitHub Actions) : si le fichier est absent (gitignore), génère un dataset de démo
+    """
+    # Cas 1 : fichier absent (runner CI ou repo public sans CSV réel)
+    if not csv_path.exists():
+        print(f"Warning: {csv_path} not found. Using demo dataset (CI mode).")
+
+        demo_data = [
+            {
+                "ID": "R001",
+                "Asset": "Demo infusion pump",
+                "Threat": "Ransomware",
+                "Vulnerability": "Unpatched OS",
+                "Probability": 4,
+                "Impact": 5,
+                "Risk": 20,
+                "Decision": "Reduce",
+                "Recommendation": "Patch management + network segmentation"
+            },
+            {
+                "ID": "R002",
+                "Asset": "Demo patient monitor",
+                "Threat": "Unauthorized access",
+                "Vulnerability": "Weak credentials",
+                "Probability": 3,
+                "Impact": 4,
+                "Risk": 12,
+                "Decision": "Reduce",
+                "Recommendation": "Strong auth + MFA where possible"
+            },
+        ]
+
+        df = pd.DataFrame(demo_data)
+        return df
+
+    # Cas 2 : fichier présent (ton environnement local)
     try:
+        print(f"Loading CSV from: {csv_path}")
         df = pd.read_csv(csv_path)
-        # Required English Column Names
-        required_cols = ['ID', 'Asset', 'Threat', 'Vulnerability',
-                         'Probability', 'Impact', 'Risk', 'Decision', 'Recommendation']
+
+        required_cols = [
+            'ID', 'Asset', 'Threat', 'Vulnerability',
+            'Probability', 'Impact', 'Risk', 'Decision', 'Recommendation'
+        ]
 
         if not all(col in df.columns for col in required_cols):
             print(f"Error: Missing columns in CSV. Expected: {required_cols}")
             sys.exit(1)
 
-        # Ensure Risk is calculated correctly (since it might be missing or pre-calculated)
+        # Recalcule le risque pour être sûr
         df['Risk'] = df['Probability'] * df['Impact']
 
         return df
@@ -259,7 +300,7 @@ def main():
 
     print("Creating Excel file...")  # Pas besoin de f-string ici
     print("Success: Excel file generated successfully!")  # Pas besoin de f-string ici
-    print(f"  - {len(df)} risks processed")  # F-string nécessaire ici pour afficher len(df)
+    print(" - " + str(len(df)) + " risks processed")  # F-string nécessaire ici pour afficher len(df)
     print("  - 3 tabs created: Matrix + Heatmap + Dashboard")  # Pas besoin de f-string ici
 
 if __name__ == '__main__':

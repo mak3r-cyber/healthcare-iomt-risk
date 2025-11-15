@@ -16,6 +16,8 @@ authors = [
 ]
 maintainers = [
     {name = "Kamilia Meliani"},
+    {name = "Lazreg Meliani"}
+
 ]
 classifiers = [
     "Development Status :: 4 - Beta",

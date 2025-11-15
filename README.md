@@ -52,25 +52,65 @@ riskops validate risk samples/healthcare/risk_sample.json
 ### Project Structure
 
 ```bash
-.
 ├── 01-Research
+│   ├── iomt_risk_sources.md
+│   └── Sources.md
 ├── 02-Matrices
+│   └── risk_matrix.csv
 ├── 03-Methodology
+│   ├── ebios-rm-light.md
+│   └── README.md
 ├── 04-Planning
+│   └── README.md
+├── 05-Business-Processes
+│   ├── access-management.md
+│   ├── incident-management.md
+│   ├── iso27001-compliance.md
+│   ├── nis2-compliance.md
+│   └── risk-management.md
+├── 05-Processus-Métier
+├── CHANGELOG.md
 ├── CODEOWNERS
 ├── CONTRIBUTING.md
 ├── current_requirements.txt
 ├── data
+│   └── catalog
 ├── docs
+│   ├── architecture
+│   ├── cces
+│   ├── compliance
+│   ├── medical-practice-case-study.md
+│   ├── reports
+│   ├── resource-catalog.md
+│   └── runbooks
 ├── LICENSE
 ├── pyproject.toml
+├── pyproject.toml.bak
 ├── README.md
 ├── requirements.txt
 ├── ROADMAP.md
 ├── SECURITY.md
 ├── src
+│   ├── riskops
+│   └── riskops.egg-info
 ├── tools
+│   ├── csv2xlsx.py
+│   ├── demo.sh
+│   ├── sec_checks.sh
+│   └── validate_controls_link.py
+├── UNKNOWN.egg-info
+│   ├── dependency_links.txt
+│   ├── PKG-INFO
+│   ├── SOURCES.txt
+│   └── top_level.txt
 └── venv
+    ├── bin
+    ├── include
+    ├── lib
+    ├── lib64 -> lib
+    └── pyvenv.cfg
+
+
 
 ```
 ## Business Process Mapping

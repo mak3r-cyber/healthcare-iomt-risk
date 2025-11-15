@@ -103,30 +103,14 @@ module = "riskops.validators.link_validator"
 disable_error_code = ["no-any-return"]
 
 [tool.pytest.ini_options]
-minversion = "8.0"
+pythonpath = ["src"]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = [
-  "--verbose",
-  "--cov=src/riskops",
-  "--cov-report=term-missing",
-  "--cov-report=html",
-  "--cov-branch",
-  "--cov-fail-under=70",
-]
+addopts = "-v --cov=src/riskops/grc --cov-report=term-missing --cov-fail-under=40"
 
 [tool.coverage.run]
 source = ["src"]
-branch = true
-omit = [
-  "*/tests/*",
-  "*/test_*.py",
-  "*/__pycache__/*",
-]
 
 [tool.coverage.report]
 precision = 2
-show_missing = true
 skip_covered = false

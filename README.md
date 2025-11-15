@@ -1,18 +1,20 @@
-# RiskOps Health / IoMT — Open-Source Toolkit
+# RiskOps Health / IoMT — Open-Source Cybersecurity Toolkit
 
-License: MIT
-Python: 3.9+
-Tests
-Coverage
+
+## License
+MIT License
+
+## Python Version
+Python 3.9+ or later
 
 ### Empowering small healthcare orgs to manage IoMT cybersecurity risks with a lightweight, scriptable framework.
 
 ## Overview
-Focus: Risk assessment, compliance mapping (ISO 27001, HIPAA, GDPR), and IoMT-focused detection/pentest tools for clinics, labs, and practices.
+RiskOps Health / IoMT is an open-source cybersecurity toolkit focused on **risk management** for connected medical devices (**IoMT**) in small and medium-sized healthcare organizations (clinics, hospitals, labs).
 Inspired by EBIOS RM – no heavy tools or consultants needed.
 
 ## Why RiskOps?
-
+Small and medium-sized healthcare organizations (SMEs) typically lack the necessary resources to manage cybersecurity risks associated with connected medical devices. RiskOps Health / IoMT provides an automated, scriptable framework for assessing IoMT risks without needing heavy consulting or tools.
 Challenges for SMEs: Limited time, budget, staff, and IoMT-specific tools.
 Solutions Provided:
 Python-based risk scoring engine.
@@ -23,25 +25,13 @@ Non-intrusive pentest checklists (design phase).
 
 ## Key Features
 
-### GRC Engine (src/riskops/grc/)
-
-Load/validate CSV risk matrices.
-Score risks (Probability × Impact).
-Map to controls: ISO 27001, HIPAA, GDPR.
-Gap analysis & reports.
-90% test coverage.
-
-### Detection (Pilot)
-
-HL7/DICOM rules.
-Data flow docs (PACS, RIS, HIS).
-
-### Pentest Light (Design)
-
-SAFE approach: Non-intrusive checks.
-Attack surface & hardening reviews.
+- **GRC Engine**: Automates risk scoring, compliance mapping (ISO 27001, HIPAA, GDPR), and generates reports.
+- **HL7/DICOM Detection Rules**: Pilot phase (detection of vulnerabilities in medical device communication protocols).
+- **Compliance**: Compliance with ISO 27001, HDS, HIPAA, GDPR.
+- **SAFE Pentest**: Non-intrusive pen-test checklist, focused on small healthcare organizations.
 
 ## Project Status
+
 Active development: GRC stable; detection/pentest in pilot. Experimental parts may evolve.
 
 ## Quality Pipeline
@@ -55,53 +45,69 @@ Security: SBOM (syft), scans (trivy) via tools/sec_checks.sh
 CI: GitHub Actions for QA, security, builds.
 
 ## Quickstart
+
+Follow these steps to get started with the project:
+
 ```bash
 git clone https://github.com/mak3r-cyber/healthcare-iomt-risk.git
 cd healthcare-iomt-risk
 python -m venv venv
 . venv/bin/activate
-pip install -r requirements.txt -e .
+pip install -r requirements.txt
 pytest tests/test_grc -v
 python tools/csv2xlsx.py  # Generates risk_matrix.xlsx
 ```
-Output: Excel with scored matrix, heatmap, dashboard.
 
 ## Structure
+
 ```text
-├── 01-Research/          # IoMT refs
-├── 02-Matrices/          # CSV inputs
-├── 03-Methodology/       # EBIOS RM docs
-├── 04-Planning/          # Org
-├── 05-Business-Processes/# ISO/NIS2 processes
-├── data/                 # Catalogs
-├── docs/                 # Runbooks, reports
-├── src/riskops/          # Core code (grc, soc, pentest)
+├── 01-Research/          # IoMT references, risk sources
+├── 02-Matrices/          # Input CSV files for risk matrices
+├── 03-Methodology/       # EBIOS RM documentation
+├── 04-Planning/          # Project planning and organization
+├── 05-Business-Processes/# Processes for ISO 27001, NIS2 compliance
+├── data/                 # Supporting catalogs and datasets
+├── docs/                 # Documentation (runbooks, reports)
+├── src/riskops/          # Core code (GRC, SOC, Pentest)
 ├── tests/                # Unit tests
-├── tools/                # Utils (csv2xlsx, sec_checks)
+├── tools/                # Utilities (CSV to XLSX, security checks)
 └── LICENSE, ROADMAP.md...
 ```
 
 ## Business Processes
-Reusable: Incident Mgmt, Risk Mgmt, Access, ISO 27001, NIS2. See 05-Business-Processes/.
+
+This project includes reusable business processes aligned with key industry standards such as **ISO 27001** and **NIS2**:
+
+- **Incident Management**: [See 05-Business-Processes/incident-management.md]
+- **IoMT Risk Management**: [See 05-Business-Processes/risk-management.md]
+- **ISO 27001 Compliance**: [See 05-Business-Processes/iso27001-compliance.md]
+- **NIS2 Compliance**: [See 05-Business-Processes/nis2-compliance.md]
 
 ## Methodology
-EBIOS RM Light steps:
 
-Scope
-Threats
-Vulnerabilities
-Score risks (automated)
-Treatment
-Monitor
+RiskOps Health / IoMT follows the **EBIOS RM Light methodology**:
 
+1. **Scope**: Define system boundaries and objectives.
+2. **Threats**: Identify and evaluate threats.
+3. **Vulnerabilities**: Identify vulnerabilities in the IoMT environment.
+4. **Score Risks**: Automatically calculate risk scores based on Probability × Impact.
+5. **Treatment**: Propose risk treatment options (e.g., Avoid, Reduce, Transfer).
+6. **Monitor**: Track risk status and ensure ongoing mitigation.
+
+**Regulatory Coverage**: 
+- GDPR Article 32
+- ISO 27001 (Clause 6.1.2)
+- HDS (French Health Data Security Requirements)
+- EU MDR (Cybersecurity for Medical Devices)
+- NIS2 Directive (Critical Health Infrastructure)
 Covers: GDPR Art.32, ISO 27001, HDS, EU MDR, NIS2.
 
 ## Sources
 
-Regulators: CNIL, ANSSI, EU.
-Standards: ISO 27k, NIST 800-30/66.
-Med Devices: FDA, IEC 62304/80001, CVEs.
-Protocols: HL7 FHIR, DICOM, BLE, 802.1X.
+**Regulators**: CNIL, ANSSI, EU Commission.
+**Standards**: ISO/IEC 27001/27002, NIST SP 800-30/66, ISO 80001.
+**Medical Devices**: FDA Cybersecurity, IEC 62304/80001, CVE databases.
+**Protocols**: HL7 FHIR, DICOM, Bluetooth LE, 802.1X.
 
 ## Roadmap
 

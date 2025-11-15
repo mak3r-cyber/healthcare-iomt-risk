@@ -1,165 +1,35 @@
-#!/usr/bin/env python3
 """CSV to XLSX Risk Matrix Converter with Security Hardening.
 
 Automatically generates a styled Excel risk matrix with charts from a CSV file.
 
-Security improvements:
+Security features:
 - CSV injection protection (escapes dangerous characters)
 - File size validation (max 10MB)
 - Data type validation for risk scores
 - Input sanitization for all cell values
-
-DEPRECATION WARNING:
-    This standalone script is deprecated and will be removed in v1.0.
-    Please use the riskops CLI instead:
-
-        pip install -e .
-        riskops generate matrix <csv_file>
-
-    The new CLI provides the same security features with better error handling
-    and integration with the full RiskOps toolkit.
 """
+
 import sys
-import warnings
 from pathlib import Path
+from typing import Optional
 
 import openpyxl
 import pandas as pd
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
-# Deprecation warning
-warnings.warn(
-    "tools/csv2xlsx.py is deprecated. Use 'riskops generate matrix' instead. "
-    "Install with: pip install -e . && riskops generate matrix <csv_file>",
-    DeprecationWarning,
-    stacklevel=2,
+from riskops.core.constants import (
+    EXCEL_SHEET_NAMES,
+    HEADER_STYLE,
+    MAX_FILE_SIZE_MB,
+    REQUIRED_RISK_COLUMNS,
+    RISK_COLORS,
 )
-print("\n" + "=" * 70)
-print("⚠️  DEPRECATION WARNING")
-print("=" * 70)
-print("This script (tools/csv2xlsx.py) is deprecated and will be removed in v1.0")
-print("\nPlease install and use the riskops CLI instead:")
-print("  1. pip install -e .")
-print("  2. riskops generate matrix <csv_file>")
-print("\nThe CLI provides the same security features with better integration.")
-print("=" * 70 + "\n")
-
-# Security: Maximum file size (10MB)
-MAX_FILE_SIZE_MB = 10
-MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024
-
-# Colors for Risk Scoring (English Keys)
-COLORS = {
-    "low": "C6EFCE",  # Light Green
-    "medium": "FFEB9C",  # Yellow
-    "high": "FFC7CE",  # Light Red
-    "critical": "FF0000",  # Red
-}
-
-# Security: Characters that can trigger CSV injection in Excel
-DANGEROUS_CHARS = ["=", "+", "-", "@", "\t", "\r"]
-
-
-def sanitize_cell_value(value):
-    """
-    Sanitizes cell values to prevent CSV injection attacks.
-
-    CSV injection (also called Formula Injection) occurs when applications
-    export user-controlled data to CSV/Excel files without proper validation.
-    Attackers can inject formulas that execute when the file is opened.
-
-    Security measures:
-    - Detects dangerous characters at start of cell (=, +, -, @, tab, carriage return)
-    - Prefixes dangerous values with single quote (') to treat as text
-    - Preserves numeric types (integers, floats) for proper Excel handling
-
-    Args:
-        value: Cell value to sanitize
-
-    Returns:
-        Sanitized value safe for Excel export (str or numeric type)
-    """
-    # Handle None/NaN
-    if pd.isna(value) or value is None:
-        return ""
-
-    # Preserve numeric types (int, float) - they're safe from CSV injection
-    if isinstance(value, (int, float)):
-        return value
-
-    # Convert to string for text values
-    str_value = str(value).strip()
-
-    # Empty string is safe
-    if not str_value:
-        return ""
-
-    # Security: Check if value starts with dangerous character
-    if any(str_value.startswith(char) for char in DANGEROUS_CHARS):
-        # Prefix with single quote to force Excel to treat as text
-        # This prevents formula execution
-        return "'" + str_value
-
-    return str_value
-
-
-def validate_file_size(file_path: Path) -> None:
-    """
-    Validates file size to prevent memory exhaustion attacks.
-
-    Args:
-        file_path: Path to file to validate
-
-    Raises:
-        ValueError: If file exceeds maximum size
-    """
-    file_size = file_path.stat().st_size
-
-    if file_size > MAX_FILE_SIZE_BYTES:
-        raise ValueError(
-            f"File size {file_size / 1024 / 1024:.2f}MB exceeds "
-            f"maximum allowed size of {MAX_FILE_SIZE_MB}MB"
-        )
-
-
-def validate_risk_scores(df: pd.DataFrame) -> None:
-    """
-    Validates risk score data types and ranges.
-
-    Security measures:
-    - Ensures Probability and Impact are integers in range 1-5
-    - Prevents type confusion attacks
-    - Validates Risk calculation
-
-    Args:
-        df: DataFrame to validate
-
-    Raises:
-        ValueError: If data validation fails
-    """
-    # Validate Probability column
-    if not pd.api.types.is_numeric_dtype(df["Probability"]):
-        raise ValueError("Probability column must contain numeric values")
-
-    if not df["Probability"].between(1, 5).all():
-        invalid_rows = df[~df["Probability"].between(1, 5)]
-        raise ValueError(
-            f"Probability must be between 1-5. Invalid rows: {invalid_rows.index.tolist()}"
-        )
-
-    # Validate Impact column
-    if not pd.api.types.is_numeric_dtype(df["Impact"]):
-        raise ValueError("Impact column must contain numeric values")
-
-    if not df["Impact"].between(1, 5).all():
-        invalid_rows = df[~df["Impact"].between(1, 5)]
-        raise ValueError(f"Impact must be between 1-5. Invalid rows: {invalid_rows.index.tolist()}")
-
-    # Validate Risk calculation
-    expected_risk = df["Probability"] * df["Impact"]
-    if not (df["Risk"] == expected_risk).all():
-        print("Warning: Risk scores recalculated to match Probability × Impact")
+from riskops.utils.security import (
+    sanitize_cell_value,
+    validate_file_size,
+    validate_risk_scores,
+)
 
 
 def load_csv(csv_path: Path) -> pd.DataFrame:
@@ -238,19 +108,7 @@ def load_csv(csv_path: Path) -> pd.DataFrame:
         df = pd.read_csv(csv_path, dtype=dtype_spec)
 
         # Validate required columns
-        required_cols = [
-            "ID",
-            "Asset",
-            "Threat",
-            "Vulnerability",
-            "Probability",
-            "Impact",
-            "Risk",
-            "Decision",
-            "Recommendation",
-        ]
-
-        missing_cols = [col for col in required_cols if col not in df.columns]
+        missing_cols = [col for col in REQUIRED_RISK_COLUMNS if col not in df.columns]
         if missing_cols:
             raise ValueError(f"Missing required columns: {missing_cols}")
 
@@ -274,10 +132,18 @@ def load_csv(csv_path: Path) -> pd.DataFrame:
         sys.exit(1)
 
 
-def create_styled_header(ws, headers: list):
+def create_styled_header(ws, headers: list) -> None:
     """Creates a styled Excel header row with sanitized values."""
-    header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
-    header_font = Font(color="FFFFFF", bold=True, size=11)
+    header_fill = PatternFill(
+        start_color=HEADER_STYLE["fill_color"],
+        end_color=HEADER_STYLE["fill_color"],
+        fill_type="solid",
+    )
+    header_font = Font(
+        color=HEADER_STYLE["font_color"],
+        bold=HEADER_STYLE["bold"],
+        size=HEADER_STYLE["font_size"],
+    )
 
     for col_num, header in enumerate(headers, 1):
         cell = ws.cell(row=1, column=col_num)
@@ -288,7 +154,7 @@ def create_styled_header(ws, headers: list):
         cell.alignment = Alignment(horizontal="center", vertical="center")
 
 
-def apply_risk_coloring(ws, df: pd.DataFrame):
+def apply_risk_coloring(ws, df: pd.DataFrame) -> None:
     """Applies colors based on the Risk level."""
     # Find the column index for 'Risk'
     try:
@@ -312,13 +178,15 @@ def apply_risk_coloring(ws, df: pd.DataFrame):
 
         # Apply color to the risk cell
         ws.cell(row=row_num, column=risk_col_idx).fill = PatternFill(
-            start_color=COLORS[color_key], end_color=COLORS[color_key], fill_type="solid"
+            start_color=RISK_COLORS[color_key],
+            end_color=RISK_COLORS[color_key],
+            fill_type="solid",
         )
 
 
-def create_heatmap(wb, df: pd.DataFrame):
+def create_heatmap(wb, df: pd.DataFrame) -> None:
     """Creates a Probability × Impact heatmap sheet."""
-    ws = wb.create_sheet(title="Heatmap")
+    ws = wb.create_sheet(title=EXCEL_SHEET_NAMES["heatmap"])
 
     # Titles for the matrix (English)
     ws["A1"] = "Impact →"
@@ -341,7 +209,7 @@ def create_heatmap(wb, df: pd.DataFrame):
         cell.alignment = Alignment(horizontal="center")
 
     # Fill matrix with counters
-    risk_counts = {}
+    risk_counts: dict[tuple[int, int], int] = {}
     for _, row in df.iterrows():
         # Ensure values are treated as integers
         try:
@@ -364,13 +232,13 @@ def create_heatmap(wb, df: pd.DataFrame):
 
             # Color based on risk score
             if risk <= 6:
-                color = COLORS["low"]
+                color = RISK_COLORS["low"]
             elif risk <= 12:
-                color = COLORS["medium"]
+                color = RISK_COLORS["medium"]
             elif risk <= 14:
-                color = COLORS["high"]
+                color = RISK_COLORS["high"]
             else:
-                color = COLORS["critical"]
+                color = RISK_COLORS["critical"]
 
             cell.fill = PatternFill(start_color=color, end_color=color, fill_type="solid")
             cell.alignment = Alignment(horizontal="center", vertical="center")
@@ -382,9 +250,9 @@ def create_heatmap(wb, df: pd.DataFrame):
         ws.column_dimensions[get_column_letter(col)].width = 12
 
 
-def create_dashboard(wb, df: pd.DataFrame):
+def create_dashboard(wb, df: pd.DataFrame) -> None:
     """Creates a risk summary dashboard sheet."""
-    ws = wb.create_sheet(title="Dashboard")
+    ws = wb.create_sheet(title=EXCEL_SHEET_NAMES["dashboard"])
 
     # Title
     ws["A1"] = "Dashboard - Risk Summary"
@@ -438,7 +306,9 @@ def create_dashboard(wb, df: pd.DataFrame):
         ws.cell(row=row, column=2).value = sanitize_cell_value(risk["Asset"])
         ws.cell(row=row, column=3).value = risk["Risk"]
         ws.cell(row=row, column=3).fill = PatternFill(
-            start_color=COLORS["critical"], end_color=COLORS["critical"], fill_type="solid"
+            start_color=RISK_COLORS["critical"],
+            end_color=RISK_COLORS["critical"],
+            fill_type="solid",
         )
 
     # Adjust widths
@@ -447,32 +317,59 @@ def create_dashboard(wb, df: pd.DataFrame):
     ws.column_dimensions["C"].width = 10
 
 
-def main():
-    """Main function to execute script."""
-    # Paths (using correct project structure and English names)
-    project_root = Path(__file__).parent.parent
-    csv_path = project_root / "02-Matrices" / "risk_matrix.csv"
-    xlsx_path = project_root / "docs" / "reports" / "risk_matrix.xlsx"
+def convert_csv_to_xlsx(
+    csv_path: Path, output_path: Optional[Path] = None, verbose: bool = True
+) -> Path:
+    """
+    Converts a CSV risk matrix to a fully formatted Excel file.
+
+    This is the main entry point for CSV to XLSX conversion. It creates
+    an Excel workbook with three sheets: Risk Matrix, Heatmap, and Dashboard.
+
+    Args:
+        csv_path: Path to input CSV file
+        output_path: Path for output XLSX file (defaults to same dir as CSV)
+        verbose: Whether to print progress messages
+
+    Returns:
+        Path to the generated Excel file
+
+    Raises:
+        FileNotFoundError: If CSV file doesn't exist
+        ValueError: If CSV validation fails
+
+    Example:
+        >>> from pathlib import Path
+        >>> csv_file = Path("risk_matrix.csv")
+        >>> excel_file = convert_csv_to_xlsx(csv_file)
+        >>> print(f"Created: {excel_file}")
+    """
+    # Default output path
+    if output_path is None:
+        output_path = csv_path.parent / "reports" / "risk_matrix.xlsx"
 
     # Create output directory if it doesn't exist
-    xlsx_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    print("=" * 60)
-    print("RiskOps CSV to XLSX Converter v1.1 (Security Hardened)")
-    print("=" * 60)
+    if verbose:
+        print("=" * 60)
+        print("RiskOps CSV to XLSX Converter v1.1 (Security Hardened)")
+        print("=" * 60)
 
     # Security: Load and validate CSV with security checks
     df = load_csv(csv_path)
 
-    print("\nCreating Excel file with security protections...")
+    if verbose:
+        print("\nCreating Excel file with security protections...")
 
     # Create workbook
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.title = "Risk_Matrix"
+    ws.title = EXCEL_SHEET_NAMES["matrix"]
 
     # Security: Write data with CSV injection protection
-    print("Writing risk matrix data...")
+    if verbose:
+        print("Writing risk matrix data...")
     for r_idx, row in enumerate(df.itertuples(index=False), 1):
         for c_idx, value in enumerate(row, 1):
             # Security: Sanitize every cell value to prevent CSV injection
@@ -495,26 +392,28 @@ def main():
         ws.column_dimensions[column].width = min(max_length + 2, 50)
 
     # Create additional sheets
-    print("Creating heatmap...")
+    if verbose:
+        print("Creating heatmap...")
     create_heatmap(wb, df)
 
-    print("Creating dashboard...")
+    if verbose:
+        print("Creating dashboard...")
     create_dashboard(wb, df)
 
     # Save
-    print(f"\nSaving to: {xlsx_path}")
-    wb.save(xlsx_path)
+    if verbose:
+        print(f"\nSaving to: {output_path}")
+    wb.save(output_path)
 
-    print("\n" + "=" * 60)
-    print("✓ SUCCESS: Excel file generated successfully!")
-    print("=" * 60)
-    print(f"  • {len(df)} risks processed")
-    print("  • 3 tabs created: Risk Matrix + Heatmap + Dashboard")
-    print("  • CSV injection protection applied")
-    print(f"  • File size validated (max {MAX_FILE_SIZE_MB}MB)")
-    print("  • Risk scores validated (Probability & Impact 1-5)")
-    print("=" * 60)
+    if verbose:
+        print("\n" + "=" * 60)
+        print("✓ SUCCESS: Excel file generated successfully!")
+        print("=" * 60)
+        print(f"  • {len(df)} risks processed")
+        print("  • 3 tabs created: Risk Matrix + Heatmap + Dashboard")
+        print("  • CSV injection protection applied")
+        print(f"  • File size validated (max {MAX_FILE_SIZE_MB}MB)")
+        print("  • Risk scores validated (Probability & Impact 1-5)")
+        print("=" * 60)
 
-
-if __name__ == "__main__":
-    main()
+    return output_path

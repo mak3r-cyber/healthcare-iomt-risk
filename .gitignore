@@ -11,3 +11,12 @@ docs/reports/*.xlsx
 *.bak
 *.orig
 *~
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Build / packaging artefacts
+*.egg-info/
+dist/
+build/

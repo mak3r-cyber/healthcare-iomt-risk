@@ -1,11 +1,113 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "riskops"
+version = "0.2.0"
+description = "Healthcare IoMT Risk Assessment Framework - Open-source toolkit for SMEs"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = ["healthcare", "iomt", "risk-assessment", "cybersecurity", "iso27001", "ebios"]
+authors = [
+    {name = "Kamilia Meliani"},
+    {name = "Lazreg Meliani"}
+]
+maintainers = [
+    {name = "Kamilia Meliani"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Healthcare Industry",
+    "Topic :: Security",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    "pandas>=2.3.3",
+    "openpyxl>=3.1.5",
+    "requests>=2.32.0",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.8.0",
+    "ruff>=0.6.0",
+    "mypy>=1.11.0",
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-mock>=3.12.0",
+    "pip-audit>=2.7.0",
+    "types-requests",
+]
+
+[project.urls]
+Homepage = "https://github.com/mak3r-cyber/healthcare-iomt-risk"
+Documentation = "https://github.com/mak3r-cyber/healthcare-iomt-risk#readme"
+Repository = "https://github.com/mak3r-cyber/healthcare-iomt-risk.git"
+Issues = "https://github.com/mak3r-cyber/healthcare-iomt-risk/issues"
+
+[project.scripts]
+riskops = "riskops.cli.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+riskops = ["reporters/templates/*.py"]
+
 [tool.black]
 line-length = 100
+target-version = ["py38", "py39", "py310", "py311"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501"]
 
 [tool.mypy]
-python_version = "3.11"
-strict = true
+python_version = "3.9"
 mypy_path = "src"
+strict = true
+warn_unused_configs = true
+ignore_missing_imports = true
+disable_error_code = ["no-untyped-def", "type-arg"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+  "--verbose",
+  "--cov=src/riskops",
+  "--cov-report=term-missing",
+  "--cov-report=html",
+  "--cov-branch",
+  "--cov-fail-under=70",
+]
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+omit = [
+  "*/tests/*",
+  "*/test_*.py",
+  "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false

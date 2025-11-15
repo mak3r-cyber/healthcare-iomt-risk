@@ -1,328 +1,321 @@
 # RiskOps Health / IoMT — Open-source Toolkit
 
-**License**: MIT  
-**Python**: 3.8+
+**License:** MIT  
+**Python:** 3.9+
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+RiskOps Health / IoMT is an open-source cybersecurity toolkit focused on **risk management for connected medical devices (IoMT)** in small and medium-sized healthcare organizations (medical practices, clinics, laboratories).
+
+The goal is to give these organizations a **concrete, scriptable framework** to assess risks, map them to regulations, and prepare detection / pentest-light activities without needing heavy consulting or tools.
+
+---
 
 ## Context
 
-RiskOps Health / IoMT is a cybersecurity risk assessment framework designed specifically for small and medium-sized healthcare organizations (medical offices, clinics, laboratories). The goal is to enable these organizations to assess the risks of IoMT (Internet of Medical Things) devices without relying on external consultants.
+Small and medium-sized healthcare structures usually lack:
 
-### Why This Project?
-Small and medium-sized healthcare organizations typically lack the necessary resources to manage the cybersecurity risks associated with connected medical devices. This project provides a simple, automated methodology that ensures alignment with key security standards while being highly accessible to these organizations.
+- time and budget for full-blown GRC programs,
+- internal security staff (CISO, SOC),
+- dedicated tools for IoMT risk management.
 
-## Current Features
-- **Risk Matrix**: Automatically generated from CSV to XLSX via GitHub Actions.
-- **HL7/DICOM Detection Rules**: Pilot phase.
-- **Compliance**: HDS, ISO 27001.
-- **SAFE Pentest**: In design.
-- **Detection**: Pilot phase (HL7/DICOM rules).
+RiskOps Health / IoMT provides:
 
-## Objectives
+- a **lightweight EBIOS RM-inspired method**,
+- a **Python engine** to score and manipulate risks,
+- a **compliance mapping layer** (ISO 27001 / HIPAA / GDPR),
+- a **detection / pentest-light skeleton** oriented IoMT.
 
-- Identify and assess the priority cybersecurity risks in healthcare.
-- Provide an operational methodology for SMEs.
-- Integrate IoMT devices (monitors, pumps, etc.).
-- Ensure compliance with regulations (GDPR, HDS, ISO 27001, EU MDR).
-- Automate the generation of risk matrices and reports.
-- Provide light pentest (SAFE) methodology and detection rules.
-
-## Project Status
-
-## Project Status
-
-This project is currently under active development. While the code is available for exploration, please note that **certain features are still being verified** and the project is **not yet fully executable**. Some components are in the pilot phase, and others will be added in future releases.
-
-Feel free to explore the code, report issues, or contribute. Detailed instructions for executing the project will be provided once all components have been verified and are fully functional.
-
-Thank you for your patience and support!
-
-## Quickstart (3 commands)
-
-Before starting, make sure to install **RiskOps** (instructions coming soon).
-
-```bash
-python -m venv .venv && . .venv/bin/activate
-pip install -e .
-riskops validate risk samples/healthcare/risk_sample.json
-```
-
-### Project Structure
-
-```bash
-├── 01-Research
-│   ├── iomt_risk_sources.md
-│   └── Sources.md
-├── 02-Matrices
-│   └── risk_matrix.csv
-├── 03-Methodology
-│   ├── ebios-rm-light.md
-│   └── README.md
-├── 04-Planning
-│   └── README.md
-├── 05-Business-Processes
-│   ├── access-management.md
-│   ├── incident-management.md
-│   ├── iso27001-compliance.md
-│   ├── nis2-compliance.md
-│   └── risk-management.md
-├── 05-Processus-Métier
-├── CHANGELOG.md
-├── CODEOWNERS
-├── CONTRIBUTING.md
-├── current_requirements.txt
-├── data
-│   └── catalog
-├── docs
-│   ├── architecture
-│   ├── cces
-│   ├── compliance
-│   ├── medical-practice-case-study.md
-│   ├── reports
-│   ├── resource-catalog.md
-│   └── runbooks
-├── LICENSE
-├── pyproject.toml
-├── pyproject.toml.bak
-├── README.md
-├── requirements.txt
-├── ROADMAP.md
-├── SECURITY.md
-├── src
-│   ├── riskops
-│   └── riskops.egg-info
-├── tools
-│   ├── csv2xlsx.py
-│   ├── demo.sh
-│   ├── sec_checks.sh
-│   └── validate_controls_link.py
-├── UNKNOWN.egg-info
-│   ├── dependency_links.txt
-│   ├── PKG-INFO
-│   ├── SOURCES.txt
-│   └── top_level.txt
-└── venv
-    ├── bin
-    ├── include
-    ├── lib
-    ├── lib64 -> lib
-    └── pyvenv.cfg
-
-
-
-```
-## Business Process Mapping
-
-This project includes several business processes specifically related to cybersecurity and compliance, in alignment with key industry standards such as **ISO 27001** and **NIS 2**.
-
-- [Incident Management](05-Processus-Metier/gestion-incidents.md)
-- [IoMT Risk Management](05-Processus-Metier/gestion-risques.md)
-- [User Access Management](05-Processus-Metier/gestion-acces.md)
-- [ISO 27001 Compliance](05-Processus-Metier/conformité-iso27001.md)
-- [NIS 2 Compliance](05-Processus-Metier/conformité-nis2.md)
-
-## Installation
-
-### Prerequisites
-
-- Python 3.8+
-- pip (Python package manager)
-
-### Install dependencies
-
-Clone the repository and install the dependencies:
-
-```bash
-git clone https://github.com/mak3r-cyber/healthcare-iomt-risk.git
-cd healthcare-iomt-risk
-pip install -r requirements.txt
-```
-
-### Usage
-
-1. Generate the Risk Matrix in Excel
-
-Run the following command to generate the risk matrix in an Excel file:
-
-```bash
-python3 tools/csv2xlsx.py
-```
-
-This will create the file "02-Matrices/risk_matrix.xlsx" with 3 sheets:
-
-Risk Matrix: Fully scored and color-coded table.
-Heatmap: Visualization of Probability × Impact.
-Dashboard: Statistical summary and top critical risks.
-
-2. Customize the Risk Matrix
-
-Edit the "02-Matrices/risk_matrix.csv" file to add your own data:
-
-Example entry:
-
-```bash
-ID,Asset,Threat,Vulnerability,Probability,Impact,Risk,Decision,Recommendation
-R026,Medical device,Intrusion,Unauthorized access,3,4,12,Reduce,Specific recommendation
-```
-Probability: 1-5 (Very low → Very high)
-Impact: 1-5 (Negligible → Catastrophic)
-Risk: Automatically calculated (P × I)
-Decision: Avoid / Reduce / Transfer / Accept
-
-3. Apply the Methodology
-
-Follow the steps outlined in the "03-Methodology/ebios-rm-light.md" file. This includes:
-
-Phase 1: Define scope (2-4 hours)
-Phase 2: Identify threats (4-6 hours)
-Phase 3: Assess vulnerabilities (6-8 hours)
-Phase 4: Score risks (4-6 hours)
-Phase 5: Risk treatment plan (8-12 hours)
-Phase 6: Validation and follow-up (ongoing)
-
-Estimated total effort for SMEs (10-20 people): approximately 30-40 hours for the initial analysis.
 ---
 
-## Case Studies
+## Current Capabilities
 
-### 1. General Medical Practice (Fictional)
+### 1. GRC — Risk & Compliance Engine
 
-Context: 2 doctors, 2,000 patients/year.
-Security budget: €13,700 for year 1, then €3,200/year ongoing.
-ROI: Positive after 3 years.
+Implemented in `src/riskops/grc/`:
 
-### 2. Cardiology Clinic with IoMT (Fictional)
+- **RiskAssessmentEngine**
+  - Load and validate risk matrices from CSV.
+  - Compute risk scores (Probability × Impact).
+  - Enforce constraints:
+    - numeric ranges (e.g. 1–5),
+    - mandatory columns,
+    - maximum file size,
+    - basic CSV injection sanitisation.
+  - Works directly on `pandas.DataFrame` for integration with other tools.
 
-Context: 4 cardiologists, 5,000 patients/year, 30 beds.
-IoMT Devices: Patient monitors, defibrillators, infusion pumps.
-Security budget: €85,000 for year 1, then €25,000/year recurring.
-Risks: 15 IoMT-specific risks (malicious firmware, parameter manipulation, etc.)
+- **ComplianceMapper**
+  - Map risk scenarios to high-level controls:
+    - **ISO/IEC 27001 Annex A** controls,
+    - **HIPAA** safeguards (administrative / physical / technical),
+    - **GDPR** Article 32 security measures.
+  - Produce a **gap analysis**:
+    - Recommended controls (per framework),
+    - Already implemented controls (optional input),
+    - Missing controls per framework.
 
-Do you have a real-world case? Share it anonymously via issue #1.
+- **Test coverage**
+  - Dedicated tests in `tests/test_grc/`.
+  - Coverage for GRC module > **90 %** (pytest + coverage).
 
-## Regulatory Compliance
+### 2. Detection — HL7 / DICOM (Pilot)
 
-This methodology covers the following regulations:
+Detection-related content is being structured in:
 
-GDPR Article 32: Appropriate technical and organizational measures.
-ISO 27001: Risk analysis (Clause 6.1.2) and Annex A controls.
-HDS: Health data hosting security requirements (CNIL guidelines).
-EU MDR 2017/745: Medical device cybersecurity (Annex I).
-NIS2 Directive: Critical health infrastructure (if applicable).
+- `docs/` (runbooks, architecture, reports),
+- placeholders under `src/riskops/soc/` or equivalent for future logic,
+- first **HL7 / DICOM-oriented detection rules** (pilot phase).
 
-## Documented Sources
+Objectives:
 
-The project is based on  verified sources, including:
+- document typical IoMT data flows (PACS, RIS, HIS),
+- prepare rule templates that connect:
+  - risk scenarios → detection logic → SOC use cases.
 
-Regulations: CNIL, ANSSI, GDPR, EU MDR.
-Standards: ISO 27001/27002/27005/27799/81001, NIST SP 800-30/800-66.
-Medical Devices: FDA Cybersecurity, IEC 62304/80001, CVE database.
+This part is still experimental and not considered stable.
+
+### 3. Pentest Light — SAFE Approach (Design Phase)
+
+The **SAFE pentest** component is designed to stay:
+
+- **non-intrusive** for medical devices,
+- aligned with **risk scenarios** instead of pure “CTF style” tests,
+- usable as a **checklist** for small organizations.
+
+Current status:
+
+- structure and documentation prepared under `docs/` and `src/riskops/pentest/`,
+- focus on:
+  - attack surface review (network / exposed services),
+  - configuration / hardening checks,
+  - linkage to risks and compliance controls.
+
+Implementation is in-progress and not yet published as a stable module.
+
+---
+
+## Project Status
+
+RiskOps Health / IoMT is under **active development**.
+
+- The **GRC engine (assessment + compliance)** is implemented and tested.
+- Detection and pentest-light parts are in **pilot / design** phase.
+- The repository is suitable for:
+  - reading the code,
+  - running tests locally,
+  - using the risk engine in small experiments.
+
+Some components are still experimental and may change between versions.
+
+---
+
+## Quality & Security of the Code
+
+The project enforces a strict quality pipeline:
+
+- **Type checking:** `mypy`
+- **Linting:** `ruff`
+- **Formatting:** `black`
+- **Tests:** `pytest` with coverage (GRC module > 90 %)
+
+Security helpers:
+
+- `tools/sec_checks.sh`
+  - Optional security checks using:
+    - **syft** (SBOM generation),
+    - **trivy** (vulnerability scan).
+  - If these tools are missing (e.g., on GitHub runners), the script logs and exits successfully without failing the CI.
+
+GitHub Actions:
+
+- QA workflow (lint / type check / tests),
+- Optional security workflow (SBOM + vuln scan),
+- Build-artifacts workflow for packaging.
+
+---
+
+## Quickstart (local)
+
+```bash
+# 1) Clone the repository
+git clone https://github.com/mak3r-cyber/healthcare-iomt-risk.git
+cd healthcare-iomt-risk
+
+# 2) Create and activate virtual environment
+python -m venv venv
+. venv/bin/activate
+
+# 3) Install dependencies (dev)
+pip install -r requirements.txt
+pip install -e .
+
+# 4) Run tests and coverage for the GRC module
+pytest tests/test_grc -v
+Generate the Excel Risk Matrix
+python tools/csv2xlsx.py
+
+
+This creates 02-Matrices/risk_matrix.xlsx with:
+
+Risk Matrix — scored and colour-coded table.
+
+Heatmap — Probability × Impact visualisation.
+
+Dashboard — summary statistics and top critical risks.
+
+Project Layout (simplified)
+.
+├── 01-Research/                 # Sources, references, IoMT-specific materials
+├── 02-Matrices/                 # CSV risk matrices (input for tools)
+├── 03-Methodology/              # EBIOS RM Light documentation
+├── 04-Planning/                 # Planning and project organisation
+├── 05-Business-Processes/       # Business processes (access, incident, ISO 27001, NIS2, risk mgmt)
+├── data/                        # Supporting data/catalogs
+├── docs/                        # Architecture, runbooks, reports, case studies
+├── src/
+│   └── riskops/
+│       ├── grc/                 # GRC engine (assessment + compliance)
+│       ├── soc/                 # Future detection logic (pilot)
+│       └── pentest/             # SAFE pentest-light structure (design phase)
+├── tests/
+│   └── test_grc/                # Unit tests for GRC module
+├── tools/
+│   ├── csv2xlsx.py              # CSV → XLSX converter (risk matrix)
+│   ├── sec_checks.sh            # Optional SBOM + vulnerability scan
+│   └── validate_controls_link.py
+└── (standard project files: LICENSE, SECURITY.md, ROADMAP.md, etc.)
+
+Business Process Mapping
+
+The project embeds several business processes aligned with ISO 27001 and NIS2:
+
+Incident Management
+
+IoMT Risk Management
+
+User Access Management
+
+ISO 27001 Compliance
+
+NIS2 Compliance
+
+These processes are documented under 05-Business-Processes/ and can be reused or adapted by SMEs.
+
+Methodology & Use
+
+Methodological backbone: EBIOS RM Light (adapted to IoMT).
+
+High-level steps, documented in 03-Methodology/ebios-rm-light.md:
+
+Define scope
+
+Identify threats
+
+Assess vulnerabilities
+
+Score risks
+
+Define treatment plan
+
+Validate & monitor
+
+The Python engine automates mainly steps 4–5 (scoring + treatment support) and partially step 3 (validation rules).
+
+Regulatory Coverage
+
+The methodology and controls mapping aim at covering:
+
+GDPR Article 32 — appropriate technical and organisational security measures,
+
+ISO/IEC 27001 — risk analysis (Clause 6.1.2) & Annex A controls,
+
+HDS — French health data hosting requirements,
+
+EU MDR 2017/745 — cybersecurity for medical devices,
+
+NIS2 — critical health infrastructure (when applicable).
+
+Documented Sources
+
+The work is based on public and recognised references, including:
+
+Regulators: CNIL, ANSSI, EU Commission.
+
+Standards: ISO/IEC 27001/27002/27005/27799/81001, NIST SP 800-30 / 800-66.
+
+Medical Devices: FDA Cybersecurity, IEC 62304 / 80001, CVE databases.
+
 Protocols: HL7 FHIR, DICOM, Bluetooth LE, 802.1X.
 
-## Technologies Used
+Roadmap (high level)
 
-Python 3.8+: Main programming language.
-Pandas: CSV data manipulation.
-Openpyxl: Excel file generation with formatting.
-Markdown: Documentation.
-Git: Version control.
+v0.2.x (current line)
 
-### Contribution Areas:
+Stable GRC engine (assessment + compliance).
 
-New sector-specific risk scenarios
-Case studies for other healthcare structures
-Python tool improvements
-Translation to English
-Bug fixes / corrections
+25+ healthcare / IoMT risk scenarios.
 
-## Roadmap
+Excel generation tool + high coverage tests.
 
-### Version 1.0 (Current)
+First HL7/DICOM detection rules (pilot).
 
-Complete EBIOS RM Light methodology.
-25 health/IoMT risk scenarios.
-Python tool for Excel generation.
-2 detailed fictional case studies.
+Next milestones
 
-### Version 1.1 (January 2025)
+Additional case studies (labs, hospitals, radiology).
 
-Case study for medical laboratory analysis.
-Management report template (PDF).
-Illustrated user guide.
-Health incident stats for 2024-2025.
-Recent CVE list for medical devices.
+Management report templates (PDF / Markdown).
 
-### Version 2.0 (Q2 2025)
+Extended IoMT risk library (50+ scenarios).
 
-Interactive web interface (Streamlit/Dash).
-Automated PDF report export.
-Expanded risk scenario library (50+).
-Integrated GDPR compliance module.
-Multi-language support (FR/EN).
+Enriched detection / pentest-light modules.
 
-## Contribution
+Multi-language support (FR / EN).
 
-Contributions are welcome. To contribute:
+Contribution
 
-Fork the project.
-Create a branch (git checkout -b feature/your-feature).
-Commit your changes (git commit -m 'Add your feature').
-Push the branch (git push origin feature/your-feature).
-Open a pull request.
+Contributions are welcome.
 
-## Contribution Areas:
+Typical contribution areas:
 
-New sector-specific risk scenarios.
-Case studies for other healthcare structures.
-Python tool improvements.
-English translation.
-Bug fixes.
+New sector-specific IoMT risk scenarios,
 
-## Free use for:
+Additional case studies (other healthcare contexts),
 
-Academic use
-Professional use
-Modification and adaptation
-Commercial use (with attribution)
+Improvements to the Python tools / CLI,
 
-## Author
+English / French documentation and examples,
+
+Bug fixes, refactoring, tests.
+
+Workflow:
+
+git checkout -b feature/your-feature
+# ... commit your changes ...
+git commit -m "feat: add my feature"
+git push origin feature/your-feature
+# Open a Pull Request to main
+
+Author
 
 Kamilia Meliani & Lazreg Meliani
-Cybersecurity - Lead implementation - Purple-team
+Cybersecurity – Lead implementation – Purple-team
 Specialties: GRC, ISO 27001/27002, EBIOS RM, Security Audits
 
-## Certifications:
-
-Lead Implemention (in progress)
-ISO 27001 Lead Implementer (planned)
-EBIOS Risk Manager (planned)
-Cisco, Linux
-
-## Acknowledgements
-
-This project is inspired by:
-
-ANSSI - EBIOS Risk Manager methodology
-CNIL - Practical guides for the healthcare sector
-CERT Santé - Threat monitoring
-Cybersecurity health community - Feedback and insights
-
-## Contact & Support
+Contact & Security
 
 Questions, suggestions, collaborations:
 
-GitHub Issues: Open a ticket
-LinkedIn: Kamilia Meliani (coming soon publication)
-Signalement vulnérabilités: git-healthcareframe.mascot374@passmail.com 
-Délai de divulgation responsable: 90 jours (par défaut). 
-Branches supportées: main. Pas de données réelles dans les issues.
+GitHub Issues: open a ticket on the repository.
 
-If this project helps you, feel free to star it!
+LinkedIn: Kamilia Meliani.
 
-Last update: November 2024
-Version: 1.0
-Status: Active - Continuous development
+Vulnerability disclosure
 
+Contact: git-healthcareframe.mascot374@passmail.com
 
+Default responsible disclosure period: 90 days.
+
+Supported branches: main.
+
+No real patient data must ever be shared in issues or test cases.
+
+Last update: November 2025
+Status: Active – continuous development

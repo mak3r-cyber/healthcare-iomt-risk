@@ -81,7 +81,19 @@ mypy_path = "src"
 strict = true
 warn_unused_configs = true
 ignore_missing_imports = true
-disable_error_code = ["no-untyped-def", "type-arg"]
+# On garde un mode strict, mais on coupe juste les warnings sur les stubs manquants
+# pour certaines libs tierces (requests, etc.).
+disable_error_code = ["import-untyped"]
+
+# Legacy converter CSV→XLSX : on accepte temporairement les fonctions non typées.
+[[tool.mypy.overrides]]
+module = "riskops.converters.*"
+ignore_errors = true
+
+# Commandes CLI Typer : points d’entrée, on n’impose pas encore 100 % d’annotations.
+[[tool.mypy.overrides]]
+module = "riskops.cli.*"
+ignore_errors = true
 
 [tool.pytest.ini_options]
 minversion = "8.0"

@@ -106,7 +106,7 @@ disable_error_code = ["no-any-return"]
 pythonpath = ["src"]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-addopts = "-v --cov=src/riskops/grc --cov-report=term-missing --cov-fail-under=40"
+addopts = "-v --cov=src/riskops/grc --cov-report=term-missing --cov-fail-under=70"
 
 [tool.coverage.run]
 source = ["src"]

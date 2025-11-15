@@ -266,40 +266,57 @@ class ComplianceMapper:
                 :class:`RiskScenario` instances.
 
         Returns:
-            A pandas DataFrame with at least "Asset" and "Threat" columns.
+            A pandas DataFrame with at least ``"Asset"`` and ``"Threat"`` columns.
 
         Raises:
             RiskInputValidationError: If the input structure is unsupported
                 or missing mandatory fields.
         """
+        # Case 1: DataFrame already
         if isinstance(risks, pd.DataFrame):
             if risks.empty:
                 raise RiskInputValidationError("Risk DataFrame is empty.")
-            # Create a shallow copy to avoid mutating the caller's DataFrame.
             df = risks.copy()
+        # Case 2: Sequence of RiskScenario
         elif isinstance(risks, Sequence):
             if not risks:
                 raise RiskInputValidationError("RiskScenario sequence is empty.")
+
             if not all(isinstance(item, RiskScenario) for item in risks):
                 raise RiskInputValidationError(
-                    "When a sequence is provided, all items must be instances of RiskScenario."
+                    "When a sequence is provided, all items must be instances " "of RiskScenario."
                 )
-            df = pd.DataFrame([asdict(item) for item in risks])
+
+            # Convert dataclass instances to a DataFrame
+            df = pd.DataFrame(asdict(item) for item in risks)
+            if df.empty:
+                raise RiskInputValidationError("RiskScenario sequence is empty.")
+
+            # Normalise lowercase dataclass fields to canonical CSV columns
+            column_map = {
+                "asset": "Asset",
+                "threat": "Threat",
+                "probability": "Probability",
+                "impact": "Impact",
+                "risk_score": "Risk",
+                "risk_level": "RiskLevel",
+            }
+            # Map "asset" -> existing column name by case-insensitive lookup
+            lower_to_actual = {col.lower(): col for col in df.columns}
+            for source_name, target_name in column_map.items():
+                if source_name in lower_to_actual and target_name not in df.columns:
+                    df[target_name] = df[lower_to_actual[source_name]]
+        # Any other type is invalid
         else:
             raise RiskInputValidationError(
-                "Unsupported risk input type. Expected pandas.DataFrame or Sequence[RiskScenario]."
+                "Unsupported risk input type. Expected pandas.DataFrame or "
+                "Sequence[RiskScenario]."
             )
 
-        # Validate mandatory columns.
+        # Final mandatory-column check (common path)
         for col in ("Asset", "Threat"):
             if col not in df.columns:
                 raise RiskInputValidationError(f"Missing required column '{col}' in risk input.")
-
-        # Normalise risk level if present.
-        if "RiskLevel" in df.columns:
-            df["RiskLevel"] = (
-                df["RiskLevel"].astype(str).map(lambda v: ComplianceMapper._normalize_risk_level(v))
-            )
 
         return df
 

@@ -24,13 +24,10 @@ jobs:
 
       - name: Run Black (check only)
         run: black --check .
-
-      - name: Run MyPy on tools
-        run: >
-          mypy --install-types --non-interactive
-          --ignore-missing-imports
-          --disable-error-code no-untyped-def
-          tools
+     
+      - name: Run MyPy on RiskOps package
+        run: |
+          mypy src/riskops
 
   build-artifacts:
     needs: qa
